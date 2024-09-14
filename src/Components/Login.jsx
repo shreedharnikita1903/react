@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './LoginForm.css';
 const Login = () => {
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,13 +8,13 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    // Basic validation for empty fields
+
     if (!email || !password) {
       setError('Both fields are required!');
       return;
     }
     
-    // Custom error handling
+   
     if (email !== 'user@gmail.com') {
       setError(`Invalid email: ${email}`);
     } else if (password !== '123') {
@@ -26,9 +26,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <div className="login-form">
       <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -50,7 +51,8 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-    </div>
+      </div>
+      </div>
   );
 };
 
