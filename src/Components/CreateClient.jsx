@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "./useApi";
-const CreateDriver = () => {
-  const { data, loading, error, postData, deleteData } = useApi('http://localhost:3010/api/drivers');
-  const [driverData, setDriverData] = useState({
-    firstName: "",
-    lastName: "",
+
+const CreateClient = () => {
+  const { data, loading, error, postData } = useApi('http://localhost:3010/api/client');
+  const [clientData, setclientData] = useState({
+    companyName: "",
     email: "",
     password: "",
     phoneNumber: "",
-    dateOfBirth: "",
-    experience: 1,
-    license: "",
+    establishedOn: "",
+    registrationNo: "",
+    website: "",
     address1: "",
     address2: "",
     zip: "",
@@ -30,79 +30,61 @@ const CreateDriver = () => {
       [name]: "",
     }));
 
-    setDriverData((prevData) => ({
+    setclientData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  };
-
-  const handleExperienceChange = (change) => {
-    setDriverData((prevState) => ({
-      ...prevState,
-      experience: Math.max(0, prevState.experience + change),
-    }));
-
-    if (errors.experience && driverData.experience > 0) {
-      setErrors((prevErrors) => ({ ...prevErrors, experience: "" }));
-    }
   };
 
   // Validation function
   const validateForm = () => {
     const newErrors = {};
 
-    // Basic validation for required fields
-    if (!driverData.firstName) newErrors.firstName = "First Name is required";
-    if (!driverData.lastName) newErrors.lastName = "Last Name is required";
-    if (!driverData.email) newErrors.email = "Email is required";
-    if (!/\S+@\S+\.\S+/.test(driverData.email)) newErrors.email = "Email is invalid";
-    if (!driverData.password) newErrors.password = "Password is required";
-    if (!driverData.phoneNumber) newErrors.phoneNumber = "Phone Number is required";
-    if (!driverData.dateOfBirth) newErrors.dateOfBirth = "Date of Birth is required";
-    if (driverData.experience < 0) newErrors.experience = "Experience must be non-negative"; // Changed error message
-    if (!driverData.license) newErrors.license = "License Number is required";
-    if (!driverData.address1) newErrors.address1 = "Address 1 is required";
-    if (!driverData.address2) newErrors.address2 = "Address 2 is required";
-    if (!driverData.zip) newErrors.zip = "Zip Code is required";
-    if (!driverData.state) newErrors.state = "State is required";
-    if (!driverData.city) newErrors.city = "City is required";
-    if (!driverData.country) newErrors.country = "Country is required";
+    if (!clientData.companyName) newErrors.companyName = "Company Name is required";
+    if (!clientData.email) newErrors.email = "Email is required";
+    if (!/\S+@\S+\.\S+/.test(clientData.email)) newErrors.email = "Email is invalid";
+    if (!clientData.password) newErrors.password = "Password is required";
+    if (!clientData.phoneNumber) newErrors.phoneNumber = "Phone Number is required";
+    if (!clientData.establishedOn) newErrors.establishedOn = "Established Date is required";
+    if (!clientData.registrationNo) newErrors.registrationNo = "Registration No is required";
+    if (!clientData.address1) newErrors.address1 = "Address 1 is required";
+    if (!clientData.zip) newErrors.zip = "Zip Code is required";
+    if (!clientData.state) newErrors.state = "State is required";
+    if (!clientData.city) newErrors.city = "City is required";
+    if (!clientData.country) newErrors.country = "Country is required";
 
     setErrors(newErrors);
-
-    // Returns true if there are no errors
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmitDriver = async (e) => {
+  const handleSubmitClients = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log("Form data:", driverData); // Log form data
+      console.log("Form data:", clientData);
 
       try {
-        const response = await postData(driverData)
-       
+        const response = await postData(clientData);
+
         if (response.ok) {
           const result = await response.json();
           console.log("Data posted successfully:", result);
         } else {
-          console.error("Error posting data:", response.statusText);
+            console.error("Error posting data:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error:", error);
         }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-
+  
           // Reset form data
-          setDriverData({
-            firstName: "",
-            lastName: "",
+          setclientData({
+            companyName: "",
             email: "",
             password: "",
             phoneNumber: "",
-            dateOfBirth: "",
-            experience: 0,
-            license: "",
+            establishedOn: "",
+            registrationNo: "",
+            website: "",
             address1: "",
             address2: "",
             zip: "",
@@ -111,14 +93,11 @@ const CreateDriver = () => {
             country: "",
           });
 
-       
           setErrors({});
         } else {
-          
-        
-          console.log("Validation failed");
+       
     
-     
+   
     }
   };
 
@@ -130,51 +109,37 @@ const CreateDriver = () => {
             <div className="row">
               <div className="col-12">
                 <div className="page-title-box d-flex align-items-center justify-content-between">
-                <Link to="/ListDriver">
+                  <Link to="/ListClients">
                     <button
                       type="button"
                       className="btn btn-success waves-effect waves-light mb-3"
                     >
-                      <i className="mdi mdi-plus me-1"></i> Views Drivers
+                      <i className="mdi mdi-plus me-1"></i> View Clients
                     </button>
                   </Link>
-                  <h4 className="mb-0">Create A New Driver</h4>
+                  <h4 className="mb-0">Create A New Client</h4>
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="col-xl-12">
                 <div className="card">
                   <div className="card-body">
-                    <form onSubmit={handleSubmitDriver}>
+                    <form onSubmit={handleSubmitClients}>
                       <div className="row">
                         <div className="col-md-3">
                           <div className="mb-3">
-                            <label className="col-form-label">First Name</label>
+                            <label className="col-form-label">Company Name</label>
                             <input
                               type="text"
-                              name="firstName"
-                              placeholder="First Name"
-                              value={driverData.firstName}
+                              name="companyName"
+                              placeholder="Company Name"
+                              value={clientData.companyName}
                               onChange={handleInputChange}
                               className="form-control"
                             />
-                            {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
-                          </div>
-                        </div>
-
-                        <div className="col-md-3">
-                          <div className="mb-3">
-                            <label className="col-form-label">Last Name</label>
-                            <input
-                              type="text"
-                              name="lastName"
-                              placeholder="Last Name"
-                              value={driverData.lastName}
-                              onChange={handleInputChange}
-                              className="form-control"
-                            />
-                            {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
+                            {errors.companyName && <p style={{ color: "red" }}>{errors.companyName}</p>}
                           </div>
                         </div>
 
@@ -185,13 +150,14 @@ const CreateDriver = () => {
                               type="email"
                               name="email"
                               placeholder="Email"
-                              value={driverData.email}
+                              value={clientData.email}
                               onChange={handleInputChange}
                               className="form-control"
                             />
                             {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
                           </div>
                         </div>
+
                         <div className="col-md-3">
                           <div className="mb-3">
                             <label className="col-form-label">Password</label>
@@ -199,7 +165,7 @@ const CreateDriver = () => {
                               type="password"
                               name="password"
                               placeholder="Password"
-                              value={driverData.password}
+                              value={clientData.password}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -214,7 +180,7 @@ const CreateDriver = () => {
                               type="tel"
                               name="phoneNumber"
                               placeholder="Phone Number"
-                              value={driverData.phoneNumber}
+                              value={clientData.phoneNumber}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -224,58 +190,31 @@ const CreateDriver = () => {
 
                         <div className="col-md-3">
                           <div className="mb-3">
-                            <label className="col-form-label">Date Of Birth</label>
+                            <label className="col-form-label">Established On</label>
                             <input
                               type="date"
-                              name="dateOfBirth"
-                              value={driverData.dateOfBirth}
+                              name="establishedOn"
+                              placeholder="Established On"
+                              value={clientData.establishedOn}
                               onChange={handleInputChange}
                               className="form-control"
                             />
-                            {errors.dateOfBirth && <p style={{ color: "red" }}>{errors.dateOfBirth}</p>}
+                            {errors.establishedOn && <p style={{ color: "red" }}>{errors.establishedOn}</p>}
                           </div>
                         </div>
 
                         <div className="col-md-3">
                           <div className="mb-3">
-                            <label className="col-md-12 col-form-label">Years Of Experience</label>
-                            <div className="col-md-12">
-                              <button
-                                type="button"
-                                onClick={() => handleExperienceChange(-1)}
-                                className="btn btn-success waves-effect waves-light mb-3"
-                              >
-                                <i className="mdi mdi-minus me-1"></i>
-                              </button>
-
-                              <span style={{ padding: "10px" }}>{driverData.experience}</span>
-
-                              <button
-                                type="button"
-                                onClick={() => handleExperienceChange(1)}
-                                className="btn btn-success waves-effect waves-light mb-3"
-                              >
-                                <i className="mdi mdi-plus me-1"></i>
-                              </button>
-                              <div>
-                                {errors.experience && <p style={{ color: "red" }}>{errors.experience}</p>}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="col-md-3">
-                          <div className="mb-3">
-                            <label className="col-form-label">License Number</label>
+                            <label className="col-form-label">Registration No</label>
                             <input
                               type="text"
-                              name="license"
-                              placeholder="License Number"
-                              value={driverData.license}
+                              name="registrationNo"
+                              placeholder="Registration No"
+                              value={clientData.registrationNo}
                               onChange={handleInputChange}
                               className="form-control"
                             />
-                            {errors.license && <p style={{ color: "red" }}>{errors.license}</p>}
+                            {errors.registrationNo && <p style={{ color: "red" }}>{errors.registrationNo}</p>}
                           </div>
                         </div>
 
@@ -286,7 +225,7 @@ const CreateDriver = () => {
                               type="text"
                               name="address1"
                               placeholder="Address 1"
-                              value={driverData.address1}
+                              value={clientData.address1}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -301,7 +240,7 @@ const CreateDriver = () => {
                               type="text"
                               name="address2"
                               placeholder="Address 2"
-                              value={driverData.address2}
+                              value={clientData.address2}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -316,7 +255,7 @@ const CreateDriver = () => {
                               type="text"
                               name="zip"
                               placeholder="Zip Code"
-                              value={driverData.zip}
+                              value={clientData.zip}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -331,7 +270,7 @@ const CreateDriver = () => {
                               type="text"
                               name="state"
                               placeholder="State"
-                              value={driverData.state}
+                              value={clientData.state}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -346,7 +285,7 @@ const CreateDriver = () => {
                               type="text"
                               name="city"
                               placeholder="City"
-                              value={driverData.city}
+                              value={clientData.city}
                               onChange={handleInputChange}
                               className="form-control"
                             />
@@ -361,37 +300,35 @@ const CreateDriver = () => {
                               type="text"
                               name="country"
                               placeholder="Country"
-                              value={driverData.country}
+                              value={clientData.country}
                               onChange={handleInputChange}
                               className="form-control"
                             />
                             {errors.country && <p style={{ color: "red" }}>{errors.country}</p>}
                           </div>
                         </div>
-                      </div>
 
-                      <div className="d-flex flex-wrap gap-3 mt-3">
+                        <div className="d-flex flex-wrap gap-3 mt-3">
                         <button type="submit" className="btn btn-primary waves-effect waves-light w-md">
                           Submit
                         </button>
                         <button
                           type="button"
                           onClick={() => {
-                            setDriverData({
-                            firstName: "",
-                            lastName: "",
-                            email: "",
-                            password: "",
-                            phoneNumber: "",
-                            dateOfBirth: "",
-                            experience: 1,
-                            license: "",
-                            address1: "",
-                            address2: "",
-                            zip: "",
-                            state: "",
-                            city: "",
-                            country: "",
+                            setclientData({
+                                companyName: "",
+                                email: "",
+                                password: "",
+                                phoneNumber: "",
+                                establishedOn: "",
+                                registrationNo: "",
+                                website: "",
+                                address1: "",
+                                address2: "",
+                                zip: "",
+                                state: "",
+                                city: "",
+                                country: "",
                           })  
                           setErrors({});}}
                          className="btn btn-outline-danger waves-effect waves-light w-md" 
@@ -399,7 +336,10 @@ const CreateDriver = () => {
                           Reset
                         </button>
                       </div>
+                      </div>
                     </form>
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Error: {error.message}</p>}
                   </div>
                 </div>
               </div>
@@ -411,4 +351,4 @@ const CreateDriver = () => {
   );
 };
 
-export default CreateDriver;
+export default CreateClient;

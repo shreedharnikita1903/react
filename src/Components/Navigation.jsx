@@ -45,6 +45,9 @@ const Navigation = () => {
                   <li>
                     <Link to="/CreateDriver"> Create New Driver</Link>
                   </li>
+                  <li>
+                    <Link to="/Createclient"> Create New Client</Link>
+                  </li>
                 </ul>
               </li>
             </ul>

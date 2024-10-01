@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+
 import useApi from './useApi';
 const ListTruck = () => {
   const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/trucks');
