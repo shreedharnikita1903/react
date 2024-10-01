@@ -6,9 +6,10 @@ import CreateTruck from './Components/CreateTruck';
 import CreateDriver from './Components/CreateDriver'
 import ListTruck from './Components/ListTruck';
 import EditTruck from './Components/EditTruck';
-import ReadTruck from './Components/ReadTruck';
+import ListClients from './Components/ListClients';
 import ListDriver from './Components/ListDriver';
 import EditDriver from './Components/EditDriver'
+import EditClients from './Components/EditClients'
 import CreateClient from './Components/CreateClient';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 const App = () => {
@@ -25,7 +26,9 @@ const App = () => {
         <Route path="/CreateDriver" element={<CreateDriver />} />
         <Route path="/CreateClient" element={<CreateClient />} />
         <Route path="/ListTruck" element={<ListTruck />} />
+        <Route path="/ListClients" element={<ListClients />} />
         <Route path="/EditTruck/:id" element={<EditTruck />} />
+        <Route path="/EditClients/:id" element={<EditClients />} />
         <Route path="/ListDriver" element={<ListDriver />} />
         <Route path="/EditDriver/:id" element={<EditDriver />} />
 

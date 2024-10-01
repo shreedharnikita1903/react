@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useApi from "./useApi";
 
 const CreateClient = () => {
-  const { data, loading, error, postData } = useApi('http://localhost:3010/api/client');
+  const { data, loading, error, postData } = useApi('http://localhost:3010/api/clients');
   const [clientData, setclientData] = useState({
     companyName: "",
     email: "",
