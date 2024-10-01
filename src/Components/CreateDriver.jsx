@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useApi from "./useApi";
 const CreateDriver = () => {
+  const { data, loading, error, postData, deleteData } = useApi('http://localhost:3010/api/drivers');
   const [driverData, setDriverData] = useState({
     firstName: "",
     lastName: "",
@@ -79,17 +81,17 @@ const CreateDriver = () => {
       console.log("Form data:", driverData); // Log form data
 
       try {
-        const response = await fetch('http://localhost:3010/api/drivers', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(driverData), // Use driverData here
-        });
-
+        const response = await postData(driverData)
+       
         if (response.ok) {
           const result = await response.json();
           console.log("Data posted successfully:", result);
+        } else {
+          console.error("Error posting data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
 
           // Reset form data
           setDriverData({
@@ -109,16 +111,14 @@ const CreateDriver = () => {
             country: "",
           });
 
-          // Clear errors
+       
           setErrors({});
         } else {
-          console.error("Error posting data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    } else {
-      console.log("Validation failed");
+          
+        
+          console.log("Validation failed");
+    
+     
     }
   };
 

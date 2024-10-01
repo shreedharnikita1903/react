@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-const CreateTruck = () => {
-   
+import useApi from './useApi';
 
-    
-    
+const CreateTruck = () => {
+  const { data, loading, error, postData, deleteData } = useApi('http://localhost:3010/api/trucks');
+
   const [formData, setFormData] = useState({
     truckName: "",
     truckNo: "",
@@ -22,12 +22,11 @@ const CreateTruck = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setErrors({ ...errors, [name]: "" });
-    setFormData({ ...formData, [name]: value });
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-
-const handleCapacityChange = (change) => {
+  const handleCapacityChange = (change) => {
     setFormData((prevState) => ({
       ...prevState,
       capacity: Math.max(0, prevState.capacity + change),
@@ -36,7 +35,6 @@ const handleCapacityChange = (change) => {
       setErrors((prevErrors) => ({ ...prevErrors, capacity: "" }));
     }
   };
-  
 
   const validateForm = () => {
     const newErrors = {};
@@ -58,51 +56,37 @@ const handleCapacityChange = (change) => {
     }
 
     if (!formData.truckColor) newErrors.truckColor = "Truck Color is required";
-    if (!formData.truckCondition)
-      newErrors.truckCondition = "Truck Condition is required";
-    if (!formData.haulableMaterial)
-      newErrors.haulableMaterial = "Haulable Material is required";
+    if (!formData.truckCondition) newErrors.truckCondition = "Truck Condition is required";
+    if (!formData.haulableMaterial) newErrors.haulableMaterial = "Haulable Material is required";
     if (!formData.ownership) newErrors.ownership = "Ownership is required";
-    if (!formData.vehicleType)
-      newErrors.vehicleType = "Vehicle Type is required";
-    if (!formData.purchaseDate)
-      newErrors.purchaseDate = "Purchase Date is required";
+    if (!formData.vehicleType) newErrors.vehicleType = "Vehicle Type is required";
+    if (!formData.purchaseDate) newErrors.purchaseDate = "Purchase Date is required";
     if (!formData.driver) newErrors.driver = "Driver selection is required";
-    if (formData.capacity <= 0)
-      newErrors.capacity = "Capacity must be greater than 0";
+    if (formData.capacity <= 0) newErrors.capacity = "Capacity must be greater than 0";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (validateForm()) {
-      console.log("Form data:", formData); // Log form data
-  
+      console.log("Form data:", formData);
+
       try {
-        const response = await fetch('http://localhost:3010/api/trucks', { 
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
+        const response = await postData(formData); // Utilizing the postData from useApi hook
         if (response.ok) {
           const result = await response.json();
           console.log("Data posted successfully:", result);
-       
         } else {
           console.error("Error posting data:", response.statusText);
         }
       } catch (error) {
         console.error("Error:", error);
       }
-  
-     
+
+      // Reset form after successful submission
       setFormData({
         truckName: "",
         truckNo: "",
@@ -115,7 +99,6 @@ const handleSubmit = async (e) => {
         purchaseDate: "",
         driver: "",
       });
-     
       setErrors({});
     } else {
       console.log("Validation failed");

@@ -1,31 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-
+import useApi from './useApi';
 const ListTruck = () => {
-  const [data, setData] = useState([]);
+  const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/trucks');
   const [deleted, setDeleted] = useState(false);
+  
 
+  
   useEffect(() => {
     if (deleted) {
       setDeleted(false);
     }
-    axios
-      .get('http://localhost:3010/api/trucks')
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => console.log(err));
   }, [deleted]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3010/api/trucks/${id}`)
-      .then((res) => {
-        setDeleted(true); 
-      })
-      .catch((err) => console.log(err));
+    
+    deleteData(id);
+    setDeleted(true); 
   };
+
 
   return (
     <div id="layout-wrapper">
@@ -45,7 +39,7 @@ const ListTruck = () => {
                 <div className="card">
                   <div className="card-body">
                     <div>
-                      <Link to="/CreateTruck">
+                      <Link to="/">
                         <button
                           type="button"
                           className="btn btn-success waves-effect waves-light mb-3"

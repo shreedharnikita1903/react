@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-
+import useApi from './useApi';
 const ListDriver = () => {
-  const [drivers, setDrivers] = useState([]);
+  const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/drivers');
+ 
   const [deleted, setDeleted] = useState(false);
 
-  useEffect(() => {
-    const fetchDrivers = async () => {
-      try {
-        const res = await axios.get('http://localhost:3010/api/drivers'); // Corrected URL
-        setDrivers(res.data);
-      } catch (err) {
-        console.error(err.response ? err.response.data : err.message); // Detailed error logging
-      }
-    };
+  
 
-    fetchDrivers();
-    
+  useEffect(() => {
     if (deleted) {
       setDeleted(false);
     }
   }, [deleted]);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3010/api/drivers/${id}`);
-      setDeleted(true); 
-    } catch (err) {
-      console.error(err.response ? err.response.data : err.message); // Detailed error logging
-    }
+  const handleDelete = (id) => {
+    
+    deleteData(id);
+    setDeleted(true); 
   };
 
   return (
@@ -76,7 +65,7 @@ const ListDriver = () => {
                         </thead>
                         <tbody>
                           {
-                            drivers.map((driver, index) => (
+                            data.map((driver, index) => (
                               <tr key={driver.id}>
                                 <td>{index + 1}</td>
                                 <td>{driver.firstName}</td>
