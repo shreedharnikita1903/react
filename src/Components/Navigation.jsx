@@ -40,13 +40,14 @@ const Navigation = () => {
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/"> Create New Truck</Link>
-                  </li>
                   <li>
-                    <Link to="/CreateDriver"> Create New Driver</Link>
-                  </li>
+                    <Link to="/ListClients">  Client</Link>
+                
                   <li>
-                    <Link to="/Createclient"> Create New Client</Link>
+                    <Link to="/ListDriver"> Driver</Link>
+                  </li>
+                  </li>
+                    <Link to="/ListTruck">  Truck</Link>
                   </li>
                 </ul>
               </li>

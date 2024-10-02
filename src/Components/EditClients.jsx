@@ -150,7 +150,7 @@ const EditClients = () => {
                         <div className="col-md-3">
                           <div className="mb-3">
                             <label htmlFor="establishedOn" className="form-label">
-                            establishedOn
+                            EstablishedOn
                             </label>
                             <input
                               type="date"

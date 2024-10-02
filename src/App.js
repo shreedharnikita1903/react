@@ -22,7 +22,8 @@ const App = () => {
       <Header/>
       <Navigation/>
       <Routes>
-        <Route path="/" element={<CreateTruck />} />
+
+        <Route path="/CreateTruck" element={<CreateTruck />} />
         <Route path="/CreateDriver" element={<CreateDriver />} />
         <Route path="/CreateClient" element={<CreateClient />} />
         <Route path="/ListTruck" element={<ListTruck />} />

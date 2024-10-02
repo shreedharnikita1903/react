@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import toast from 'react-hot-toast';  // Import toast
 import useApi from './useApi';
 const ListTruck = () => {
   const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/trucks');
@@ -39,7 +39,7 @@ const ListTruck = () => {
                 <div className="card">
                   <div className="card-body">
                     <div>
-                      <Link to="/">
+                      <Link to="/CreateTruck">
                         <button
                           type="button"
                           className="btn btn-success waves-effect waves-light mb-3"
