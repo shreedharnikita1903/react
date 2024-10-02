@@ -278,7 +278,7 @@ const EditClients = () => {
                         >
                           Submit
                         </button>
-                        <Link to='/listclient'>
+                        <Link to='/ListClients'>
                           <button
                             type="button"
                             className="btn btn-outline-danger waves-effect waves-light w-md"

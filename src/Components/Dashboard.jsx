@@ -63,13 +63,52 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-             
-             
+                   
                 </div>
-                
+                <div class="row">
+                   <div class="col-md-6 col-xl-6">
+                        <div class="card" >
+                            <div class="card-body" style={{ height:300 }}>
+                                <div>
+                                   <h3>Area Chart</h3>
+                                    <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
+                                    <p class="text-muted mb-0">Showing the total visitor for last 6 month</p>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-6">
+                        <div class="card" >
+                            <div class="card-body" style={{ height:300 }}>
+                                <div>
+                                   <h3>Bar Chart</h3>
+                                    <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
+                                    <p class="text-muted mb-0">January -June 2024</p>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-md-6 col-xl-12">
+                        <div class="card" >
+                            <div class="card-body" style={{ height:300 }}>
+                                <div>
+                                   <h3>Line Chart</h3>
+                                    <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
+                                    <p class="text-muted mb-0">January -June 2024</p>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                   
+                 </div>
             </div> 
         </div>
-
+       
     </div>
 </div>
     );
