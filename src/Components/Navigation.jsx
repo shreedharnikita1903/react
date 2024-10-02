@@ -39,16 +39,46 @@ const Navigation = () => {
                   <span>Creat Truck </span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                  <li>
-                  <li>
-                    <Link to="/ListClients">  Client</Link>
-                
-                  <li>
-                    <Link to="/ListDriver"> Driver</Link>
-                  </li>
-                  </li>
-                    <Link to="/ListTruck">  Truck</Link>
-                  </li>
+                      <li>
+                    
+                        <Link to="/ListClients">  Client</Link>
+                        </li>
+                        <li>
+                          <Link to="/ListDriver"> Driver</Link>
+                        </li>
+                      <li>
+                        <Link to="">Materials</Link>
+                      </li>
+                      <li>
+                      
+                        <Link to="/ListTruck">  Truck</Link>
+                      </li>
+                </ul>
+              </li>
+                <li>
+                  <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="uil-list-ui-alt"></i>
+                    <span>Work Order</span>
+                  </a>
+                <ul class="sub-menu" aria-expanded="false">
+                      <li>
+                    
+                        <Link to="">  Tickets</Link>
+                        </li>
+                     
+                </ul>
+              </li>
+              <li>
+                  <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="uil-list-ui-alt"></i>
+                    <span>Administration</span>
+                  </a>
+                <ul class="sub-menu" aria-expanded="false">
+                      <li>
+                    
+                        <Link to=""> Bulk Upload</Link>
+                        </li>
+                     
                 </ul>
               </li>
             </ul>
