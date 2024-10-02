@@ -28,10 +28,10 @@ const Navigation = () => {
               <li class="menu-title">Menu</li>
 
               <li>
-                <a href="index">
+                <Link to="/">
                   <i class="uil-home-alt"></i>
                   <span> Super Admin</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">

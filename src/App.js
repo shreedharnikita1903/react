@@ -11,6 +11,7 @@ import ListDriver from './Components/ListDriver';
 import EditDriver from './Components/EditDriver'
 import EditClients from './Components/EditClients'
 import CreateClient from './Components/CreateClient';
+import Dashboard from  './Components/Dashboard'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 const App = () => {
   
@@ -22,7 +23,7 @@ const App = () => {
       <Header/>
       <Navigation/>
       <Routes>
-
+         <Route path="/" element={<Dashboard />} />
         <Route path="/CreateTruck" element={<CreateTruck />} />
         <Route path="/CreateDriver" element={<CreateDriver />} />
         <Route path="/CreateClient" element={<CreateClient />} />

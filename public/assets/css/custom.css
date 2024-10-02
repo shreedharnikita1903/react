@@ -133,3 +133,29 @@ td,th{
 }
 
 
+
+
+
+
+.dashboard-main {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 300px 500px;
+    grid-template-areas:
+      "kpi"
+      "subchart"
+      "main";
+  }
+  
+  .kpi {
+    grid-area: kpi;
+  }
+  
+  .dashboard-subChart {
+    grid-area: subchart;
+  }
+  
+  .dashboard-mainChart {
+    grid-area: main;
+  }
