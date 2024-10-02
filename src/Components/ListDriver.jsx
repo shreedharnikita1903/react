@@ -60,7 +60,7 @@ const ListDriver = () => {
                             <th>Driver Name</th>
                             <th>Driver Number</th>
                             <th>Driver Email</th>
-                            <th>Update/Read/Delete</th>
+                            <th>Update/Delete</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -78,12 +78,7 @@ const ListDriver = () => {
                                   >
                                     <i className="fas fa-edit"></i>
                                   </Link>
-                                  <Link
-                                    to={`/readdrivers/${driver.id}`}
-                                    className="px-3 text-primary"
-                                  >
-                                    <i className="fas fa-eye"></i>
-                                  </Link>
+                                  
                                   <button
                                     onClick={() => handleDelete(driver.id)}
                                     className="px-3 text-danger"

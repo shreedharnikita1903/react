@@ -60,7 +60,7 @@ const ListTruck = () => {
                             <th>Truck Name</th>
                             <th>Truck Number</th>
                             <th>Driver</th>
-                            <th>Update/Read/Delete</th>
+                            <th>Update/Delete</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -78,12 +78,7 @@ const ListTruck = () => {
                                   >
                                     <i className="fas fa-edit"></i>
                                   </Link>
-                                  <Link
-                                    to={`/readTruck/${truck.id}`}
-                                    className="px-3 text-primary"
-                                  >
-                                    <i className="fas fa-edit"></i>
-                                  </Link>
+                                 
                                   <button
                                     onClick={() => handleDelete(truck.id)}
                                     className="px-3 text-danger"

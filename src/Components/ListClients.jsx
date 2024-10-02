@@ -60,7 +60,7 @@ const Listclient = () => {
                             <th>Company  Name</th>
                             <th>Phone Number</th>
                             <th> Email</th>
-                            <th>Update/Read/Delete</th>
+                            <th>Update/Delete</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -78,12 +78,7 @@ const Listclient = () => {
                                   >
                                     <i className="fas fa-edit"></i>
                                   </Link>
-                                  <Link
-                                    to={`/readclients/${client.id}`}
-                                    className="px-3 text-primary"
-                                  >
-                                    <i className="fas fa-eye"></i>
-                                  </Link>
+                                 
                                   <button
                                     onClick={() => handleDelete(client.id)}
                                     className="px-3 text-danger"
