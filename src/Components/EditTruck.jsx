@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const EditTruck = () => {
   const { id } = useParams(); // Get truck ID from the route parameters
   const navigate = useNavigate();
@@ -48,7 +49,8 @@ const EditTruck = () => {
     try {
       await axios.put(`http://localhost:3010/api/trucks/${id}`, truckData);
       console.log("Truck updated successfully");
-      navigate("/listTruck");
+      // navigate("/listTruck");
+      toast.success("Data edited successfully!");
     } catch (err) {
       setError("Error updating truck data");
     }
@@ -274,6 +276,7 @@ const EditTruck = () => {
                         >
                          Back
                         </button></Link>
+                        <ToastContainer />
                       </div>
                       </div>
                     </form>

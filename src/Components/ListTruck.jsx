@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import toast from 'react-hot-toast';  // Import toast
+import { ToastContainer } from 'react-toastify';
 import useApi from './useApi';
 const ListTruck = () => {
   const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/trucks');
@@ -100,6 +100,7 @@ const ListTruck = () => {
                             ))
                           }
                         </tbody>
+                        <ToastContainer />
                       </table>
                     </div>
                   </div>

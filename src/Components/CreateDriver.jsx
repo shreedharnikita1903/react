@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "./useApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CreateDriver = () => {
   const { data, loading, error, postData, deleteData } = useApi('http://localhost:3010/api/drivers');
   const [driverData, setDriverData] = useState({
@@ -86,11 +88,16 @@ const CreateDriver = () => {
         if (response.ok) {
           const result = await response.json();
           console.log("Data posted successfully:", result);
+          // toast.success("Data posted successfully!"); 
         } else {
           console.error("Error posting data:", response.statusText);
+          toast.error("Error posting data!"); 
         }
       } catch (error) {
-        console.error("Error:", error);
+        // console.error("Error:", error);
+        // toast.error("Error occurred while posting data."); 
+         // toast.error("Error occurred while posting data."); 
+        //  toast.success("Data posted successfully!"); 
       }
 
           // Reset form data
@@ -398,6 +405,7 @@ const CreateDriver = () => {
                         >
                           Reset
                         </button>
+                        <ToastContainer />
                       </div>
                     </form>
                   </div>

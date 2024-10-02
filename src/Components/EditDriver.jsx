@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const EditDriver = () => {
   const { id } = useParams(); // Get driver ID from the route parameters
   const navigate = useNavigate();
@@ -50,7 +51,8 @@ const EditDriver = () => {
     try {
       await axios.put(`http://localhost:3010/api/drivers/${id}`, driverData);
       console.log("Driver updated successfully");
-      navigate("/listDriver"); // Redirect to the driver list page
+      toast.success("Data edited successfully!");
+      // navigate("/listDriver"); 
     } catch (err) {
       setError("Error updating driver data");
     }
@@ -317,6 +319,7 @@ const EditDriver = () => {
                             Back
                           </button>
                         </Link>
+                        <ToastContainer />
                       </div>
                     </form>
                   </div>

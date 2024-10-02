@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { ToastContainer } from 'react-toastify';
 import useApi from './useApi';
 const ListDriver = () => {
   const { data: data, loading, error, deleteData } = useApi('http://localhost:3010/api/drivers');
@@ -100,6 +100,7 @@ const ListDriver = () => {
                             ))
                           }
                         </tbody>
+                        <ToastContainer />
                       </table>
                     </div>
                   </div>

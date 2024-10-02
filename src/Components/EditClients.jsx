@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const EditClients = () => {
   const { id } = useParams(); // Get client ID from the route parameters
   const navigate = useNavigate();
@@ -48,13 +49,15 @@ const EditClients = () => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3010/api/clients/${id}`, clientData);
-      console.log("client updated successfully");
-      navigate("/ListClients"); // Redirect to the client list page
+      console.log("Client updated successfully");
+      toast.success("Data edited successfully!"); // Success toast
+      // navigate("/ListClients"); // Navigate after successful edit
     } catch (err) {
+      console.error("Error updating client data", err);
       setError("Error updating client data");
+      toast.error("Error updating client data"); // Error toast
     }
   };
-
   if (loading) {
     return <p>Loading client details...</p>;
   }
@@ -286,6 +289,7 @@ const EditClients = () => {
                             Back
                           </button>
                         </Link>
+                        <ToastContainer />
                       </div>
                     </form>
                   </div>

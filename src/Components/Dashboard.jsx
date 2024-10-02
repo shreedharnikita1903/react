@@ -1,8 +1,11 @@
  
 
-import React from 'react';
+import React,{useState} from 'react';
 
+   
 const Dashboard = () => {
+
+   
     return (
        
     <div id="layout-wrapper">
@@ -40,7 +43,7 @@ const Dashboard = () => {
                                 <div>
                                 <h3>200</h3>
                                     <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
-                                    <p class="text-muted mb-0">Total Wotk Oreder</p>
+                                    <p class="text-muted mb-0">Total Driver</p>
 
                                    
                                     
@@ -57,7 +60,7 @@ const Dashboard = () => {
                                 <div>
                                    <h3>280</h3>
                                     <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
-                                    <p class="text-muted mb-0">Total Wotk Oreder</p>
+                                    <p class="text-muted mb-0">Total Truck</p>
                                 </div>
                              
                             </div>
@@ -99,6 +102,7 @@ const Dashboard = () => {
                                    <h3>Line Chart</h3>
                                     <h4 class="mb-1 mt-1"><span data-plugin="counterup"></span></h4>
                                     <p class="text-muted mb-0">January -June 2024</p>
+         
                                 </div>
                              
                             </div>

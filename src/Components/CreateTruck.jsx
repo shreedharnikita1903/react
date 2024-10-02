@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useApi from './useApi';
+import useApi from "./useApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateTruck = () => {
-  const { data, loading, error, postData, deleteData } = useApi('http://localhost:3010/api/trucks');
+  const { postData } = useApi("http://localhost:3010/api/trucks");
 
   const [formData, setFormData] = useState({
     truckName: "",
@@ -39,7 +41,7 @@ const CreateTruck = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Truck name validation - should not contain numbers
+
     const truckNameRegex = /^[a-zA-Z\s]+$/;
     if (!formData.truckName) {
       newErrors.truckName = "Truck Name is required";
@@ -47,7 +49,7 @@ const CreateTruck = () => {
       newErrors.truckName = "Truck Name should not contain numbers";
     }
 
-    // Truck number validation - should only contain numbers or specific characters
+ 
     const truckNoRegex = /^[0-9-]+$/;
     if (!formData.truckNo) {
       newErrors.truckNo = "Truck No is required";
@@ -75,18 +77,22 @@ const CreateTruck = () => {
       console.log("Form data:", formData);
 
       try {
-        const response = await postData(formData); // Utilizing the postData from useApi hook
+        const response = await postData(formData); 
         if (response.ok) {
           const result = await response.json();
           console.log("Data posted successfully:", result);
+          // toast.success("Data posted successfully!"); 
         } else {
           console.error("Error posting data:", response.statusText);
+          toast.error("Error posting data!"); 
         }
       } catch (error) {
         console.error("Error:", error);
+        // toast.error("Error occurred while posting data."); 
+        // toast.success("Data posted successfully!"); 
       }
 
-      // Reset form after successful submission
+     
       setFormData({
         truckName: "",
         truckNo: "",
@@ -101,7 +107,7 @@ const CreateTruck = () => {
       });
       setErrors({});
     } else {
-      console.log("Validation failed");
+      toast.error("Validation failed! Please correct the errors.");
     }
   };
   return (
@@ -439,6 +445,8 @@ const CreateTruck = () => {
                         >
                           Reset
                         </button>
+                        <ToastContainer />
+
                       </div>
                     </form>
                   </div>
